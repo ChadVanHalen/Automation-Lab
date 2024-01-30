@@ -33,7 +33,15 @@ Due to amount of different technologies and configurations this one will be a li
 <h2>Project walk-through:</h2>
 
 <p align="center">
-First I get my environments ready. I will be using a Windows 10 VM with Sysmon installed, as well as two headless Ubuntu servers, one running Wazuh, which is acting as my SIEM, and one running TheHive, my ticketing system.<br/>
+First I will show a diagram of the network in which we will setup.<br/>
+<img src="https://i.postimg.cc/dtbw8W8g/SOAR-Diagram.png" height="80%" width="80%" alt="SOC Analyst Lab"/><br/>
+The Windows 10 Virtual Machine, which has a Wazuh Agent on it, will send Sysmon event data to Wazuh Manager, which is on a separate Linux server.<br/>
+Shuffler will request alerts from Wazuh, and pull IOC info from VirusTotal, this example being SHA256 hash info. Shuffler will then create an alert to send to TheHive, and alert the SOC Analyst via email.<br/>
+The SOC Analyst would then view the info on TheHive and send the proper response action in response to the alert.<br/><br/>
+
+ 
+Now to get my environments ready.<br/>
+I will be using a Windows 10 VM with Sysmon installed, as well as two headless Ubuntu servers, one running Wazuh, which is acting as my SIEM, and one running TheHive, my ticketing system.<br/>
 TheHive also has several child services, Cassandra and ElasticSearch which need to be installed and enabled.<br/>
 Once I can reach all services through their web GUI on my host machine and the VM I know I can move on:<br/>
 <img src="https://i.postimg.cc/L6BBb2yG/1-Install-Sysmon-on-Windows-10-Pro-VM.png" height="80%" width="80%" alt="SOC Analyst Lab"/>
